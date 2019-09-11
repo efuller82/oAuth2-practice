@@ -20,7 +20,7 @@
 
     <script type="text/javascript">
         function onSignIn() {
-            const googleUser = gapi.auth2.getAuthInstance.currentUser.get();
+            const googleUser = gapi.auth2.getAuthInstance.currentUser.get().getAuthResponse;
             const profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
