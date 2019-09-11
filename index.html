@@ -6,52 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>oAuth2 Practice</title>
+    <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id"
-        content="409464118569-6ct2bncr21rr96t2umf7qalbd90vblpf.apps.googleusercontent.com">
-    <meta name="google-signin-cookiepolicy" content="single_host_origin" />
-    <meta name="google-signin-requestvisibleactions" content="https://schema.org/AddAction" />
-    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
+        content="409464118569-6ct2bncr21rr96t2umf7qalbd90vblpf.apps.googleusercontent.com.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
 </head>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
 <body>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 
 
-    <script type="text/javascript">
-        // gapi.load('auth2', function () {
-        //     gapi.auth2.init();
-        // });
 
-        function onLoad() {
-            gapi.load('auth2,signin2', function () {
-                var auth2 = gapi.auth2.init();
-                auth2.then(function () {
-                    // Current values
-                    var isSignedIn = auth2.isSignedIn.get();
-                    var currentUser = auth2.currentUser.get();
 
-                    if (!isSignedIn) {
-                        // Rendering g-signin2 button.
-                        gapi.signin2.render('g-signin2', {
-                            'onsuccess': 'onSignIn'
-                        });
-                    }
-                });
-            });
+
+    <script>
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
         }
-
-        function onSignIn() {
-            const googleUser = gapi.auth2.getAuthInstance.currentUser.get().getAuthResponse;
-            const profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
-
     </script>
-
 </body>
 
 </html>
