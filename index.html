@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>oAuth2 Practice</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
         content="409464118569-6ct2bncr21rr96t2umf7qalbd90vblpf.apps.googleusercontent.com">
     <meta name="google-signin-cookiepolicy" content="single_host_origin" />
@@ -20,8 +19,8 @@
 
 </body>
 <script type="text/javascript">
-    function onSignIn(googleUser) {
-        googleUser = gapi.auth2.getAuthInstance.currentUser.get();
+    function onSignIn() {
+        const googleUser = gapi.auth2.getAuthInstance.currentUser.get();
         const profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
@@ -44,6 +43,8 @@
             });
         });
     }
+
 </script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </html>
