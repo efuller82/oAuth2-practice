@@ -20,7 +20,7 @@
 
 </body>
 <script type="text/javascript">
-    function onSignIn() {
+    function onSignIn(googleUser) {
         const googleUser = gapi.auth2.getAuthInstance.currentUser.get();
         const profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
