@@ -20,9 +20,28 @@
 
 
     <script type="text/javascript">
-        gapi.load('auth2', function () {
-            gapi.auth2.init();
-        });
+        // gapi.load('auth2', function () {
+        //     gapi.auth2.init();
+        // });
+
+        function onLoad() {
+            gapi.load('auth2,signin2', function () {
+                var auth2 = gapi.auth2.init();
+                auth2.then(function () {
+                    // Current values
+                    var isSignedIn = auth2.isSignedIn.get();
+                    var currentUser = auth2.currentUser.get();
+
+                    if (!isSignedIn) {
+                        // Rendering g-signin2 button.
+                        gapi.signin2.render('g-signin2', {
+                            'onsuccess': 'onSignIn'
+                        });
+                    }
+                });
+            });
+        }
+
         function onSignIn() {
             const googleUser = gapi.auth2.getAuthInstance.currentUser.get().getAuthResponse;
             const profile = googleUser.getBasicProfile();
@@ -30,23 +49,6 @@
             console.log('Name: ' + profile.getName());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         }
-        // function onLoad() {
-        //     gapi.load('auth2,signin2', function () {
-        //         var auth2 = gapi.auth2.init();
-        //         auth2.then(function () {
-        //             // Current values
-        //             var isSignedIn = auth2.isSignedIn.get();
-        //             var currentUser = auth2.currentUser.get();
-
-        //             if (!isSignedIn) {
-        //                 // Rendering g-signin2 button.
-        //                 gapi.signin2.render('g-signin2', {
-        //                     'onsuccess': 'onSignIn'
-        //                 });
-        //             }
-        //         });
-        //     });
-        // }
 
     </script>
 
