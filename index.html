@@ -10,17 +10,52 @@
     <meta name="google-signin-client_id"
         content="409464118569-6ct2bncr21rr96t2umf7qalbd90vblpf.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <div class="container">
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h2>Please sign in</h2>
+                <p>Sign in using Google to access the features on the site.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col 12">
+                <div class="card">
+                    <span class="card-title">Lorem Ipsum</span>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
 
 
 
 
-
-    <script>
-        function onSignIn(googleUser) {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#modal1').modal();
+            $('#modal1').modal('open');
+        }); function onSignIn(googleUser) {
             // Useful data for your client-side scripts:
             var profile = googleUser.getBasicProfile();
             console.log("ID: " + profile.getId()); // Don't send this directly to your server!
