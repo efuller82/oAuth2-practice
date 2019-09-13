@@ -1,12 +1,8 @@
-.container {
-    height: 700px;
-}
-
-.card-title, .g-signin2, .p {
-    padding: 1%;
-}
-
-#card-sign-in {
+.modal-content {
     text-align: center;
+    color: white;
 }
 
+.abcRioButton {
+    margin: auto;
+}
