@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Commentify</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- !commenting this out didn't seem to affect anything; feel free to delete if you know we don't need it -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <!--! this broke modal because oauth needs jquery 1.9 and above; don't know what it's for but can probably be removed-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+    <!--! this also seems to have no effect-->
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <!-- !Need these below here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- The next 4 lines are for the google auth -->
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id"
+        content="409464118569-6ct2bncr21rr96t2umf7qalbd90vblpf.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</head>
+
+<body>
+
+    <!-- particles.js background -->
+    <div id="particles-js"></div>
+    <!--add any div below here for th particler js to work properly-->
+    <!-- Begin modal for oauth2 -->
+    <div class="modal" tabindex="-1" role="dialog" id="modal1">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Please sign in</h2>
+                </div>
+                <p>Sign in using Google to access the features on the site.</p>
+                <div class="g-signin2 modal-close" data-onsuccess="onSignIn" data-theme="dark"></div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal for oauth -->
+
+    <div class="search-box"><input type="text" placeholder="Search" class="input">
+        <div class="btnn">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form id="review-form">
+                    <input class="artist-input form-control" placeholder="Artist" type="text" />
+                    <input class="song-input form-control" placeholder="Song" type="text" />
+                    <input class="author-input form-control" placeholder="Author" type="text" />
+                    <input class="review-input form-control" placeholder="Review" type="text" />
+                    <button type="submit" class="btn btn-success">Add a Review</button>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <span class="review-container"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- The next 3 lines are needed for particle background -->
+    <script src="./js/function.js"></script>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script type="text/javascript" src="./js/particles.js"></script>
+    <!--  -->
+    <script src="js/view.js" type="text/javascript"></script>
+    <!-- begin script for oauth -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#modal1').modal();
+        }); function onSignIn(googleUser) {
+            // hides modal if user is signed in
+            $('#modal1').modal('hide');
+
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            //console.log('Given Name: ' + profile.getGivenName());
+            //console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            //console.log("ID Token: " + id_token);
+        }
+    </script>
+    <!-- end script for oauth -->
+</body>
+
+</html>
