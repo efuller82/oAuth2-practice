@@ -19,7 +19,7 @@
     "username": "root",
     "password": "Isaaczoeezra1!",
     "database": "database_production",
-    "host": "127.0.0.1",
+    "use_env_variable": "JAWSDB_URL",
     "port": 3306,
     "dialect": "mysql"
   }
