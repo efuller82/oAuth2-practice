@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/efuller82/oAuth2-practice/issues"
   },
-  "homepage": "https://github.com/efuller82/oAuth2-practice#readme"
+  "homepage": "https://github.com/efuller82/oAuth2-practice#readme",
+  "dependencies": {
+    "sequelize": "^5.18.4"
+  }
 }
