@@ -59,7 +59,7 @@
                             <i class="fa fa-cogs" aria-hidden="true"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="review-page dropdown-item" href="#">Reviews</a>
+                            <a class="index-page dropdown-item" href="#">Song Search</a>
                             <div class="dropdown-divider"></div>
                             <a class="logout dropdown-item" href="#">Log Out</a>
                         </div>
@@ -67,51 +67,56 @@
                 </div>
             </div>
         </div>
-    </header>
+        </header>
 
     <hr>
 
-    <div id="searchSong">
+<div id="searchSong">
+    <div class="container">
+        <div class="row">
 
-        <div class="col-sm-8 search-box"><input type="text" placeholder="Search" class="input">
-            <div class="btnn">
-                <i class="fa fa-search" aria-hidden="true"></i>
+            <div class="col-sm-8 search-box"><input type="text" placeholder="Review Search" class="input">
+                <div class="btnn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputState" id="inputState"><i class="fa fa-search" aria-hidden="true"> Search Parameters</i></label>
+                <select id="inputState" class="form-control">
+                    <option selected>Search All</option>
+                    <option>User Search</option>
+                    <option>Song Search</option>
+                    <option>Artist Search</option>
+                </select>
             </div>
         </div>
-
-        <hr>
-
     </div>
 
-    <div id="makeReview">
+    <hr>
 
-        <div class="container">
+</div>
 
-            <div class="row">
-                <div class="col-sm-7">
-                    <div id="song-results"></div>
+<div id="makeReview">
 
-                    <hr>
+    <div class="container">
+        <div class="row">
 
-                    <div>
-                        <form id="review-form">
-                            <textarea class="review-input form-control" placeholder="Review" rows="3"></textarea>
-                            <br>
-                            <button type="submit" class="btn btn-primary">Add a Review</button>
-                        </form>
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <button class="my-reviews btn btn-primary" type="submit">My Reviews</button>
                 <hr>
-                <div class="col-sm-1"></div>
-        
-                <div class="col-sm-4">
-                    <div class="review-container"></div>
-                </div>
+                <button class="all-reviews btn btn-primary" type="submit">All Reviews</button>
             </div>
+
+            <div class="col-sm-8">
+                <div class="review-container"></div>
+            </div>
+            
         </div>
-    
     </div>
+
+</div>
+
 
     <footer>
         Bikash, Eric
@@ -123,7 +128,7 @@
     <!-- ! changing http to https in attempt to fix particle for heroku -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="text/javascript" src="./js/particles.js"></script>
-    <script src="js/view.js" type="text/javascript"></script>
+    <script src="./js/reviews.js" type="text/javascript"></script>
 </body>
 
 </html>

@@ -5,12 +5,10 @@ var $newSong;
 var $newAuthor;
 var $newReview = $("textarea.review-input");
 
-$("#makeReview").css("visibility", "hidden");
-
 $newAuthor = window.location.href.toLowerCase();
-var userNum = $newAuthor.indexOf("usersearch");
+var userNum = $newAuthor.indexOf("userview");
 if (userNum != -1) {
-    $newAuthor = window.location.href.slice(userNum + 10);
+    $newAuthor = window.location.href.slice(userNum + 8);
     $newAuthor = $newAuthor.replace("%20", " ");
     $("input.signIn").val($newAuthor);
     loggingUser();
@@ -18,18 +16,20 @@ if (userNum != -1) {
     $("#userName").css("visibility", "hidden");
     $("#searchSong").css("visibility", "hidden");
     $(".logout-div").css("visibility", "hidden");
+    $("#makeReview").css("visibility", "hidden");
 };
 
 $(document).on("click", "button.login", loggingUser);
 $(document).on("click", "a.logout", logOut);
-$(document).on("click", "a.review-page", returnIndex);
+$(document).on("click", "a.index-page", returnIndex);
 
 function returnIndex() {
-    location.href = "userview" + $newAuthor;
+    location.href = "usersearch" + $newAuthor;
 };
 
 function logOut() {
     $newAuthor = "";
+    $(".review-container").empty();
     loggingUser();
 };
 
@@ -41,8 +41,9 @@ function loggingUser() {
         $("#userName").text("Welcome " + $newAuthor + "!");
         $("button.login").css("visibility", "hidden");
         $(".logout-div").css("visibility", "visible");
-        $("#song-results").empty();
+        $(".review-container").empty();
         $("#searchSong").css("visibility", "visible");
+        $("#makeReview").css("visibility", "visible");
     } else {
         $("#userName").css("visibility", "hidden");
         $("#login-form").css("visibility", "visible");
@@ -57,68 +58,24 @@ function loggingUser() {
 $(".btnn").click(function(){
     $(".input").toggleClass("active").focus;
     $(this).toggleClass("animate");
-    var songInput = $(".input").val();
-    if (songInput != "") {
-        console.log(songInput);
-        $newSong = songInput;
-        spotifySearch();
+    var reviewInput = $(".input").val();
+    if (reviewInput != "") {
+        console.log(reviewInput);
+        var choice = $("option:selected").text();
+        $("select").prop("selectedIndex", 0);
+
+        if (choice === "Artist Search") {
+            checkArtist(reviewInput);
+        } else if (choice === "Song Search") {
+            checkSong(reviewInput);
+        } else if (choice === "User Search") {
+            checkUser(reviewInput);
+        } else {
+            checkItAll(reviewInput);
+        }
     }
     $(".input").val("");
 }); 
-
-function spotifySearch() {
-    var songSearch = {
-        song: $newSong
-    };
-    $.post("/api/Spotify", songSearch, function(data) {
-        showSongs(data);
-        console.log(data);
-    });
-};
-
-function showSongs(data) {
-    $("#song-results").empty();
-    var songRows = $("<div class='form-check'>" + "<input class='form-check-input' type='radio' name='song' id='" + data[0].artist + "' value='" + data[0].song + "' checked>" +
-    "<img src='" + data[0].albumURL + "' height='100' width='100'/>" +
-    "Artist(s): " + data[0].artist + "<br>" +
-    "Song: " + data[0].song + "</label>" + "<div>" + 
-    "<audio controls>" + "<source src='" + data[0].previewURL + "' type='audio/ogg'>" + "Your browser does not support the audio element." + "</audio>" + "<br>");
-    $("#song-results").append(songRows);
-    $("#song-results").append("<br>" + "<br>");
-
-    for (var i = 1; i < data.length; i++) {
-        var songRows = $("<div class='form-check'>" + "<input class='form-check-input' type='radio' name='song' id='" + data[i].artist + "' value='" + data[i].song + "'>" +
-        "<img src='" + data[i].albumURL + "' height='100' width='100'/>" +
-        "Artist(s): " + data[i].artist + "<br>" +
-        "Song: " + data[i].song + "</label>" + "<div>" + 
-        "<audio controls>" + "<source src='" + data[i].previewURL + "' type='audio/ogg'>" + "Your browser does not support the audio element." + "</audio>" + "<br>");
-        $("#song-results").append(songRows);
-        $("#song-results").append("<br>" + "<br>");
-    };
-
-    $("#makeReview").css("visibility", "visible");
-    getReviews();
-};
-
-//begin script for oauth
-
-//$('#modal1').modal();
-
-// function onSignIn(googleUser) {
-//     // hides modal if user is signed in
-//     $('#modal1').modal('hide');
-//     // Useful data for your client-side scripts:
-//     var profile = googleUser.getBasicProfile();
-//     // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-//     console.log('Full Name: ' + profile.getName());
-//     //console.log('Given Name: ' + profile.getGivenName());
-//     //console.log('Family Name: ' + profile.getFamilyName());
-//     console.log("Image URL: " + profile.getImageUrl());
-//     console.log("Email: " + profile.getEmail());
-//     // The ID token you need to pass to your backend:
-//     var id_token = googleUser.getAuthResponse().id_token;
-//     //console.log("ID Token: " + id_token);
-// }
 
 var $reviewContainer = $(".review-container");
 
@@ -127,6 +84,9 @@ $(document).on("click", ".review-item", editReview);
 $(document).on("keyup", ".review-item", finishEdit);
 $(document).on("blur", ".review-item", cancelEdit);
 $(document).on("submit", "#review-form", insertReview);
+
+$(document).on("click", "button.my-reviews", getMyReviews);
+$(document).on("click", "button.all-reviews", getReviews);
 
 var reviews = [];
 
@@ -139,11 +99,46 @@ function initializeRows() {
     $reviewContainer.prepend(rowsToAdd);
 };
 
+function checkArtist(input) {
+    $.get("/api/artist/" + input, function(data) {
+        reviews = data;
+        initializeRows();
+    });
+};
+
+function checkSong(input) {
+    $.get("/api/song/" + input, function(data) {
+        reviews = data;
+        initializeRows();
+    });
+};
+
+function checkUser(input) {
+    $.get("/api/author/" + input, function(data) {
+        reviews = data;
+        initializeRows();
+    });
+};
+
+function checkItAll(input) {
+    $.get("/api/all/" + input, function(data) {
+        reviews = data;
+        initializeRows();
+    });
+};
+
 function getReviews() {
     $.get("/api/reviews", function(data) {
         reviews = data;
         initializeRows();
     });
+};
+
+function getMyReviews() {
+    $.get("/api/reviews/" + $newAuthor, function(data) {
+        reviews = data;
+        initializeRows();
+    }) 
 };
 
 function deleteReview(event) {
