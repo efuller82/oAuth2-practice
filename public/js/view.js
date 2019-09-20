@@ -103,7 +103,7 @@ $(document).ready(function () {
     // begin script for oauth
 
     $('#modal1').modal();
-    onSignIn(googleUser);
+    onSignIn();
 
     function onSignIn(googleUser) {
         // hides modal if user is signed in
