@@ -103,6 +103,7 @@ $(document).ready(function () {
     // begin script for oauth
 
     $('#modal1').modal();
+    onSignIn(googleUser);
 
     function onSignIn(googleUser) {
         // hides modal if user is signed in
@@ -119,7 +120,6 @@ $(document).ready(function () {
         // var id_token = googleUser.getAuthResponse().id_token;
         //console.log("ID Token: " + id_token);
     }
-
     var $reviewContainer = $(".review-container");
 
     $(document).on("click", "button.delete", deleteReview);
