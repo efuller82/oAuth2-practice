@@ -3,7 +3,8 @@ $(document).ready(function() {
 //begin script for oauth
 
 console.log(profile.getName() + "yaaasss");
-
+var testing = JSON.parse(localStorage.getItem("userName"));
+console.log(testing);
 
 
    
