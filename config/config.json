@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Isaaczoeezra1!",
+    "password": "secretpassword",
     "database": "reviews",
     "host": "127.0.0.1",
     "port": 3306,
@@ -17,7 +17,7 @@
   },
   "production": {
     "username": "root",
-    "password": "Isaaczoeezra1!",
+    "password": "secretpassword",
     "database": "database_production",
     "use_env_variable": "JAWSDB_URL",
     "port": 3306,
