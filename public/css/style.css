@@ -8,89 +8,147 @@ body{
 } 
 
 h1 {
-  background-color: black;
   color: white;
 }
 
-canvas { 
-    display: block; 
-    vertical-align: bottom;
- } 
+
+
+/* ---- particles.js container ---- */ 
  
- /* ---- particles.js container ---- */ 
- 
- #particles-js{ 
-    z-index: -1;
-    position:absolute; 
-    width: 100%; 
-    height: 100%; 
-    background-image: url("https://wallpaper-gallery.net/images/music-themed-wallpaper/music-themed-wallpaper-11.jpg"); 
-    background-repeat: no-repeat; 
-    background-size: auto; 
-    background-position: 50% 50%; 
-    } 
+#particles-js{ 
+  z-index: -2;
+  position:absolute; 
+  width: 100%; 
+  height: 150%; 
+  background-image: url("https://wallpaper-gallery.net/images/music-themed-wallpaper/music-themed-wallpaper-11.jpg"); 
+  background-repeat: no-repeat; 
+  background-size: auto; 
+  background-position: 50% 50%; 
+} 
+
+
     
-    .wrapper {
-        position: absolute;
-        top: 50%;
-        left: 45%;
-        transform: translate(-50%, -50%);
-      }
-       
-      .search-box {
-        height: 100px;
-        position: relative;
-        opacity: 0.8;
-        filter: alpha (opacity(60));
-      }
-       
-      .input {
-        position: absolute;
-        top: 20px;
-        right: 50px;
-        box-sizing: border-box;
-        width: 0px;
-        height: 63px;
-        padding: 0 20px;
-        outline: none;
-        font-size: 18px;
-        border-radius: 50px;
-        color: #333;
-        border: 3px solid #4DC1F9;
-        transition: all 0.8s ease;
-        opacity: 0.8;
-        filter: alpha (opacity(60));
-      }
-       
-      .btnn {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        background: #4DC1F9;
-        border-radius: 50%;
-        right: 45px;
-        top: 10px;
-        cursor: pointer;
-        text-align: center;
-        line-height: 80px;
-        font-size: 20px;
-        color: #fff;
-        transition: all 0.8s ease;
-        opacity: 0.8;
-        filter: alpha (opacity(60));
-      }
-       
-      .input.active {
-        width: 350px;
-        right: 100px;
-        opacity: 0.8;
-        filter: alpha (opacity(60));
-      }
-       
-      .btnn.animate {
-        transform: rotate(-360deg);
-        right: 100px;
-      }
+.search-box {
+  height: 100px;
+  position: relative;
+  opacity: 0.8;
+  filter: alpha (opacity(60));
+}
+    
+.input {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  box-sizing: border-box;
+  width: 0px;
+  height: 63px;
+  padding: 0 20px;
+  outline: none;
+  font-size: 18px;
+  border-radius: 50px;
+  color: #333;
+  border: 3px solid black;
+  transition: all 0.8s ease;
+  opacity: 0.8;
+  filter: alpha (opacity(60));
+}
+
+#inputstate{
+  font-size: 14px;
+}
+    
+.btnn {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background:black;
+  border-radius: 50%;
+  right: 45px;
+  top: 10px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 80px;
+  font-size: 25px;
+  color: #fff;
+  transition: all 0.8s ease;
+
+
+
+}
+.btnn {
+  -webkit-animation: color-change 6s infinite;
+  -moz-animation: color-change 6s infinite;
+  -o-animation: color-change 6s infinite;
+  -ms-animation: color-change 6s infinite;
+  animation: color-change 6s infinite;
+}
+
+@-webkit-keyframes color-change {
+  0% { color: red; }
+  10%{color:yellow}
+  20%{color:brown}
+  30% { color: blue; }
+  50%{color:pink}
+  60% { color: red; }
+  80%{color: orange}
+  90%{color:green}
+  100%{color:white}
+}
+@-moz-keyframes color-change {
+  0% { color: red; }
+  10%{color:yellow}
+  20%{color:brown}
+  30% { color: blue; }
+  50%{color:pink}
+  60% { color: red; }
+  80%{color: orange}
+  90%{color:green}
+  100%{color:white}
+}
+@-ms-keyframes color-change {
+  0% { color: red; }
+  30% { color: blue; }
+  60% { color: red; }
+  90%{color:green}
+  100%{color:white}
+}
+@-o-keyframes color-change {
+  0% { color: red; }
+  10%{color:yellow}
+  20%{color:brown}
+  30% { color: blue; }
+  50%{color:pink}
+  60% { color: red; }
+  80%{color: orange}
+  90%{color:green}
+  100%{color:white}
+}
+@keyframes color-change {
+  0% { color: red; }
+  10%{color:yellow}
+  20%{color:brown}
+  30% { color: blue; }
+  50%{color:pink}
+  60% { color: red; }
+  80%{color: orange}
+  90%{color:green}
+  100%{color:white}
+}
+
+
+
+    
+.input.active {
+  width: 350px;
+  right: 100px;
+  opacity: 0.8;
+  filter: alpha (opacity(60));
+}
+    
+.btnn.animate {
+  transform: rotate(-360deg);
+  right: 100px;
+}
 
 #review-form {
   opacity: 0.8;
@@ -103,16 +161,57 @@ canvas {
 }
       
 #userName {
-  background-color: white;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: halkduster, fantasy;
+
+  font-size: 30px;
+  text-align: center;
+  line-height: 1;
+  color:blue;
+  animation: neon 5s ease-in-out infinite alternate;
+}
+
+/*-- Animation Keyframes --*/
+
+
+
+@keyframes neon {
+  from {
+    text-shadow:
+    0 0 6px rgba(202,228,225,0.92),
+    0 0 30px rgba(202,228,225,0.34),
+    0 0 12px rgba(30,132,242,0.52),
+    0 0 21px rgba(30,132,242,0.92),
+    0 0 34px rgba(30,132,242,0.78),
+    0 0 54px rgba(30,132,242,0.92);
+  }
+  to {
+    text-shadow:
+    0 0 6px rgba(228, 202, 227, 0.98), 
+    0 0 30px rgba(202,228,225,0.42), 
+    0 0 12px rgba(30,132,242,0.58), 
+    0 0 22px rgba(242, 241, 30, 0.84), 
+    0 0 38px rgba(233, 242, 30, 0.88), 
+    0 0 60px rgb(164, 242, 30);
+  }
+}
+
+/*
+{
+  background-color: #1897bd;
   padding: 10px;
   font-size: 24px;
   opacity: 0.8;
   border-radius: 25px;
   white-space: nowrap;
-}
+} */
 
 .form-check {
-  background-color: white;
+  background-color: #94c7dc;
   padding: 20px;
   font-size: 16px;
   opacity: 0.8;
@@ -128,7 +227,7 @@ img {
 
 .review-container {
   height: 475px;
-  overflow-y:scroll;
+  overflow-y:auto; /* changed to auto from scroll so that the scroll bar is hidden when there is no reciews*/
 }
 
 .review-item {
@@ -139,6 +238,7 @@ img {
 /* width */
 ::-webkit-scrollbar {
   width: 20px;
+  display:none; /* used display:none to hide the scrolbar */
 }
 
 /* Track */
@@ -149,34 +249,78 @@ img {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(73,125,189); 
+  background: rgb(8, 63, 88); 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(28,58,148); 
+  background:#007bff; 
 }
 
 footer {
   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-   background-color: #182955;
-   color: white;
+  height: 30px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-image: url("https://priyanka25blog.files.wordpress.com/2012/11/speaker-music-blue2.jpg");
+  opacity: 0.5;
+  color: white;
+  background-position: 3% 156%;
+  z-index: -1;
 }
 
 label#inputState {
-  background-color: white;
-  padding: 10px;
+  background-color: #007bff;
+  color:white;
+  font-size: 1rem;
+  padding: 5px;
   border-radius: 25px;
   opacity: 0.8;
 }
 
 select#inputState {
-  background-color: white;
-  border-radius: 25px;
+  background-color: #007bff;
+  /*border-radius: 25px;*/
   opacity: 0.8;
+  color: white;
+}
+
+.list-group-item {
+  background-color: #94c7dc;
+}
+
+.list-group-item:first-child {
+  border-radius: 25px;
+}
+
+.dropdown-menu.show {
+  display: block;
+  background-color: #0062cc;
+}
+
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: white;
+  background-color: #ced4da;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem; 
+}
+
+.btn-primary{
+  opacity: 0.8;
+}
+
+#paramsearch {
+  margin-top: 30px;
 }
