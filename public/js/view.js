@@ -20,7 +20,7 @@ function onSignIn(googleUser) {
     //console.log("ID Token: " + id_token);
 };
 
-
+console.log(profile.getName() + "yaaasss");
 
 
 
